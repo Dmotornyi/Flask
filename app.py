@@ -5,15 +5,17 @@ app = Flask(__name__)
 
 @app.route('/index')
 def index():
+    print(url_for('index') )
     return render_template("index.html")
 
 @app.route('/hardware')
 def about():
+    print(url_for('about') )
     return render_template("hardware.html")
 
 @app.route('/login')
-@app.route('/')
 def login():
+    print(url_for('Login') )
     return render_template("Login.html")
 
 
