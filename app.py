@@ -11,7 +11,7 @@ def index():
 def about():
     return render_template("hardware.html")
 
-
+@app.route('/login')
 @app.route('/')
 def login():
     return render_template("Login.html")
