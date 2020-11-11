@@ -21,7 +21,7 @@ def about():
 @app.route('/new_input')
 def new_input():
     print(url_for('new_input') )
-    return render_template("new_input")
+    return render_template("new_input.html")
 
 
 
