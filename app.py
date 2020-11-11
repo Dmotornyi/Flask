@@ -18,10 +18,15 @@ def about():
     print(url_for('about') )
     return render_template("hardware.html")
 
-@app.route('/new_input')
+@app.route('/db_change')
 def new_input():
     print(url_for('new_input') )
     return render_template("new_input.html")
+
+@app.route('/db_search')
+def db_search():
+    print(url_for('db_search') )
+    return render_template("db_search.html")
 
 
 
