@@ -7,7 +7,7 @@
 {% block body %}
  <div class="container" align="left">
    <h4 class="mb-3">Заполните все поля:</h4>
-      <form class="needs-validation" novalidate>
+      <form class="needs-validation" novalidate method="post">
           <div class="row">
               <div class="col-md-2 mb-3">
                    <label for="who_issue">Кто выдал:</label>
@@ -28,27 +28,27 @@
               </div>
               <div class="col-md-6 mb-3">
                 <label for="tech_name">Название техники:</label>
-                <input type="text" class="form-control" id="tech_name" placeholder="Название...">
+                <input type="text" class="form-control" id="tech_name" name="tech-name" placeholder="Название..." value="">
               </div>
           </div>
           <div class="row">
                <div class="col-md-5 mb-3">
                    <label for="tech_sn">Серийный Номер:</label>
-                   <input type="text" class="form-control" id="tech_sn" placeholder="Серийный номер..." required size="25">
+                   <input type="text" class="form-control" id="tech_sn" name="tech_sn" placeholder="Серийный номер..." required size="25">
                </div>
                <div class="col-md-6 mb-3">
                    <label for="tech_in">Инвентарный номер:</label>
-                   <input type="text" class="form-control" id="tech_in" placeholder="Инвентраный номер..." size="25">
+                   <input type="text" class="form-control" id="tech_in" name="tech_in" placeholder="Инвентраный номер..." size="25">
                </div>
           </div>
           <div class="row">
                <div class="col-md-5 mb-3">
                    <label for="for_whom">Кому выдана:</label>
-                   <input type="text" class="form-control" id="for_whom" placeholder="Кому выдана..." size="25">
+                   <input type="text" class="form-control" id="for_whom" name="for_whom" placeholder="Кому выдана..." size="25">
                </div>
                <div class="col-md-6 mb-3">
                    <label for="tech_locate">Место расположение</label>
-                   <input type="text" class="form-control" id="tech_locate" placeholder="Расположение техники..." size="50">
+                   <input type="text" class="form-control" id="tech_locate" name="tech_locate" placeholder="Расположение техники..." size="50">
                </div>
           </div>
           <div class="row">
@@ -60,7 +60,7 @@
               </div>
               <div class="col-md-6 mb-3">
                   <label for="input_date">Дата выдачи:</label>
-                  <input type="date" class="form-control" size="25" id="input_date">
+                  <input type="date" class="form-control" size="25" id="input_date" name="date">
               </div>
           </div>
           <div class="row">
