@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Введите данные:
+{% endblock %}
+
+{% block body %}
+ <div class="container" align="left">
+   <h4 class="mb-3">Заполните все поля:</h4>
+      <form class="needs-validation" novalidate>
+          <div class="row">
+              <div class="col-md-2 mb-3">
+                   <label for="who_issue">Кто выдал:</label>
+                   <select class="custom-select d-block w-100" name="who_issue" id="who_issue" autofocus >
+                     <option value> Выбрать...</option>
+                     <option> Моторный Д.</option>
+                     <option> Фомичев А.</option>
+                     <option> Голуб В.</option>
+                     <option> Шамрай В.</option>
+                     <option> Шакшуев О.</option>
+                   </select>
+              </div>
+              <div class="col-md-3 mb-3">
+                <label for="tech_type">Тип техники:</label>
+                <select class="custom-select d-block w-100" name="tech_type" id="tech_type">
+                  <option value> Выбрать...</option>
+                </select>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="tech_name">Название техники:</label>
+                <input type="text" class="form-control" id="tech_name" placeholder="Название...">
+              </div>
+          </div>
+          <div class="row">
+               <div class="col-md-5 mb-3">
+                   <label for="tech_sn">Серийный Номер:</label>
+                   <input type="text" class="form-control" id="tech_sn" placeholder="Серийный номер..." required size="25">
+               </div>
+               <div class="col-md-6 mb-3">
+                   <label for="tech_in">Инвентарный номер:</label>
+                   <input type="text" class="form-control" id="tech_in" placeholder="Инвентраный номер..." size="25">
+               </div>
+          </div>
+          <div class="row">
+               <div class="col-md-5 mb-3">
+                   <label for="for_whom">Кому выдана:</label>
+                   <input type="text" class="form-control" id="for_whom" placeholder="Кому выдана..." size="25">
+               </div>
+               <div class="col-md-6 mb-3">
+                   <label for="tech_locate">Место расположение</label>
+                   <input type="text" class="form-control" id="tech_locate" placeholder="Расположение техники..." size="50">
+               </div>
+          </div>
+          <div class="row">
+              <div class="col-md-5 mb-3">
+                  <label id="tech_buisnes">Бизнес актив:</label>
+                  <select class="custom-select d-block w-100" name="tech_buisnes" id="tech_buisnes" autofocus >
+                      <option> Выбрать...</option>
+                  </select>
+              </div>
+              <div class="col-md-6 mb-3">
+                  <label for="input_date">Дата выдачи:</label>
+                  <input type="date" class="form-control" size="25" id="input_date">
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-md-11 mb-10">
+                  <label for="input_coment">Коментарии:</label>
+                  <textarea name="input_coment" id="input_coment" rows="7" cols="10" class="form-control"></textarea><br>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-md-4 mb-3" align="left">
+              <p><button type="submit" class="btn btn-secondary">Отправить</button>
+              </div>
+          </div>
+      </form>
+ </div>
+
+
+{% endblock %}
