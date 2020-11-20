@@ -1,6 +1,7 @@
-from flask import Flask, render_template, url_for, request
+from flask import Flask, render_template, url_for, request, flash
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'WRFERGEBDFdfgvdfbrbgtrbg'
 
 @app.route('/')
 @app.route('/login')
@@ -21,9 +22,13 @@ def about():
 @app.route('/new_input', methods=["POST","GET"] )
 def new_input():
     if request.method == 'POST':
+        if len(request.form['tech_name']) > 2:
+            flash('Форма заполнена')
+        else:
+            flash('Заполните указаную форму')
         print(request.form)
 #        print(url_for('new_input') )
-        return render_template("new_input.html")
+    return render_template("new_input.html")
 
 
 @app.route('/db_change')

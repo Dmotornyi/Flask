@@ -5,6 +5,10 @@
 {% endblock %}
 
 {% block body %}
+{{ super() }}
+{% for msg in get_flashed_messages() %}
+<div class="flash">{{msg}}</div>
+{% endfor %}
  <div class="container" align="left">
    <h4 class="mb-3">Заполните все поля:</h4>
       <form class="needs-validation" novalidate method="post">
@@ -28,7 +32,7 @@
               </div>
               <div class="col-md-6 mb-3">
                 <label for="tech_name">Название техники:</label>
-                <input type="text" class="form-control" id="tech_name" name="tech-name" placeholder="Название..." value="">
+                <input type="text" class="form-control" id="tech_name" name="tech_name" placeholder="Название..." value="">
               </div>
           </div>
           <div class="row">
