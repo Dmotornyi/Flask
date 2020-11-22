@@ -6,8 +6,8 @@
 
 {% block body %}
 {{ super() }}
-{% for msg in get_flashed_messages() %}
-<div class="flash">{{msg}}</div>
+{% for cat, msg in get_flashed_messages(True) %}
+<div class="flash {{cat}}">{{msg}}</div>
 {% endfor %}
  <div class="container" align="left">
    <h4 class="mb-3">Заполните все поля:</h4>

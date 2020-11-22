@@ -1,7 +1,15 @@
+import  sqlite3
+import os
 from flask import Flask, render_template, url_for, request, flash
 
+DATABASE = '/tmp/database.db'
+SECRET_KEY = 'WRFERGEBDFdfgvdfbrbgtrbg'
+
+
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'WRFERGEBDFdfgvdfbrbgtrbg'
+app.config.from_object(__name__)
+
+app.config.update(dict(DATABASE=os.path.join(app.root_path,'database.db')))
 
 @app.route('/')
 @app.route('/login')
@@ -25,10 +33,10 @@ def new_input():
         if len(request.form['tech_name']) > 2:
             flash('Форма заполнена')
         else:
-            flash('Заполните указаную форму')
-        print(request.form)
+            flash('Заполните указаную форму', category='success')
+    print(request.form)
 #        print(url_for('new_input') )
-    return render_template("new_input.html")
+    return render_template("new_input.html", category='error')
 
 
 @app.route('/db_change')
