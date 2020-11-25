@@ -1,6 +1,8 @@
 import  sqlite3
 import os
 from flask import Flask, render_template, url_for, request, flash, g
+from FDataBase import FDataBase
+
 
 DATABASE = '/tmp/database.db'
 SECRET_KEY = 'WRFERGEBDFdfgvdfbrbgtrbg'
@@ -49,10 +51,11 @@ def about():
 @app.route('/new_input', methods=["POST","GET"] )
 def new_input():
     if request.method == 'POST':
-        if len(request.form['tech_name']) > 2:
-            flash('Форма заполнена')
+        if len(request.form['tech_name']) > 2 and len(request.form['who_issue']) > 2 and len(request.form['tech_type']) > 2 and len(request.form['tech_sn']) > 2 and len(request.form['tech_in']) > 2:
+            res = dbase.addTech(request.form['who_issue'], request.form['tech_type'], request.form['tech_name'], request.form['tech_sn'], request.form['tech_in'], request.form['for_whom'], request.form['tech_locate'], request.form['tech_buisnes'], request.form['input_date'], request.form['input_coment
+            flash('Форма заполнена', category='success')
         else:
-            flash('Заполните указаную форму', category='success')
+            flash('Заполните указаную форму', category='error')
     print(request.form)
 #        print(url_for('new_input') )
     return render_template("new_input.html", category='error')
