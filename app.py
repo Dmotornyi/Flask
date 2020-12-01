@@ -4,7 +4,7 @@ from flask import Flask, render_template, url_for, request, flash, g
 from FDataBase import FDataBase
 
 
-DATABASE = '/tmp/database.db'
+DATABASE = '/Users/dmotornyi/PycharmProjects/Flask/database.db'
 SECRET_KEY = 'WRFERGEBDFdfgvdfbrbgtrbg'
 
 
@@ -19,12 +19,14 @@ def connect_db():
     conn.row_factory = sqlite3.Row
     return conn
 
+
 def create_db():
     db = connect_db()
     with app.open_resource('sq_db.sql', mode='r') as f:
         db.cursor().executescript(f.read())
     db.commit()
     db.close()
+
 
 def get_db():
     if not hasattr(g, 'link_db'):
@@ -45,20 +47,36 @@ def index():
 
 @app.route('/hardware')
 def about():
+    db = get_db()
+    dbase = FDataBase(db)
 #    print(url_for('about') )
-    return render_template("hardware.html")
+    return render_template("hardware.html", hardware=dbase.getHardwareList())
 
 @app.route('/new_input', methods=["POST","GET"] )
 def new_input():
+    db = get_db()
+    dbase = FDataBase(db)
+
     if request.method == 'POST':
         if len(request.form['tech_name']) > 2 and len(request.form['who_issue']) > 2 and len(request.form['tech_type']) > 2 and len(request.form['tech_sn']) > 2 and len(request.form['tech_in']) > 2:
-            res = dbase.addTech(request.form['who_issue'], request.form['tech_type'], request.form['tech_name'], request.form['tech_sn'], request.form['tech_in'], request.form['for_whom'], request.form['tech_locate'], request.form['tech_buisnes'], request.form['input_date'], request.form['input_coment
-            flash('Форма заполнена', category='success')
+            res = dbase.addTech(request.form['who_issue'], request.form['tech_type'], request.form['tech_name'], request.form['tech_sn'], request.form['tech_in'], request.form['for_whom'], request.form['tech_locate'], request.form['tech_buisnes'], request.form['input_date'], request.form['input_coment'])
+            if not res:
+                flash('Заполните указаную форму', category='error')
+            else:
+                flash('Форма заполнена', category='success')
         else:
             flash('Заполните указаную форму', category='error')
     print(request.form)
-#        print(url_for('new_input') )
-    return render_template("new_input.html", category='error')
+    return render_template("new_input.html")
+
+
+@app.route("/hardware/<int:id_hardware>")
+def showhardware(id_hardware):
+    db = get_db()
+    dbase = FDataBase(db)
+    hardware_details = dbase.getHardwareId(id_hardware)
+
+    return render_template('hardware_detail.html', details=hardware_details)
 
 
 @app.route('/db_change')
@@ -71,7 +89,13 @@ def db_search():
 #    print(url_for('db_search') )
     return render_template("db_search.html")
 
+@app.teardown_appcontext
+def close_db(error):
+    '''Закрываем соединение с БД, если оно было установлено'''
+    if hasattr(g, 'link_db'):
+        g.link_db.close()
+
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)

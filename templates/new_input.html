@@ -11,7 +11,7 @@
 {% endfor %}
  <div class="container" align="left">
    <h4 class="mb-3">Заполните все поля:</h4>
-      <form class="needs-validation" novalidate method="post">
+      <form action="{{url_for('new_input')}}" class="needs-validation" novalidate method="post">
           <div class="row">
               <div class="col-md-2 mb-3">
                    <label for="who_issue">Кто выдал:</label>
@@ -69,7 +69,7 @@
               </div>
               <div class="col-md-6 mb-3">
                   <label for="input_date">Дата выдачи:</label>
-                  <input type="date" class="form-control" size="25" id="input_date" name="date">
+                  <input type="date" class="form-control" size="25" id="input_date" name="input_date">
               </div>
           </div>
           <div class="row">
