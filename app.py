@@ -1,7 +1,8 @@
 import  sqlite3
 import os
-from flask import Flask, render_template, url_for, request, flash, g
+from flask import Flask, render_template, url_for, request, flash, g, redirect
 from FDataBase import FDataBase
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
 DATABASE = '/Users/dmotornyi/PycharmProjects/Flask/database.db'
@@ -39,6 +40,25 @@ def get_db():
 def login():
 #    print(url_for('login') )
     return render_template("login.html")
+
+@app.route('/register', methods=["POST", "GET"])
+def register():
+    db = get_db()
+    dbase = FDataBase(db)
+    if request.method == "POST":
+        if len(request.form['firstname']) > 4 and len(request.form['email']) > 4 and len(request.form['psw']) > 4 and request.form['psw'] == request.form['psw2']:
+            hash = generate_password_hash(request.form['psw'])
+            res = dbase.addUser(request.form['firstname'], request.form['email'], hash)
+            if res:
+                flash("Success registration", "success")
+                return redirect(url_for('login'))
+            else:
+                flash("Bad enter information", "error")
+        else:
+            flash("Bad enter information", "error")
+    return render_template("register.html")
+
+
 
 @app.route('/index')
 def index():
@@ -94,6 +114,11 @@ def close_db(error):
     '''Закрываем соединение с БД, если оно было установлено'''
     if hasattr(g, 'link_db'):
         g.link_db.close()
+
+
+@app.errorhandler(404)
+def pageNot(error):
+    return render_template("404.html")
 
 
 

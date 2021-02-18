@@ -7,9 +7,33 @@
 
 {% block body %}
 
-<div class="container" xmlns="http://www.w3.org/1999/html">
-
-     <h1> Чудный сайт для отдела обеспечения эфира </h1>
-
+        <table border="1", class="table table-striped table_sm" >
+            <thead>
+             <tr>
+                 <th> # </th>
+                 <th> Название </th>
+                 <th> Серийный номер</th>
+                 <th> Инвентарный номер</th>
+                 <th> Кому выдано </th>
+                 <th> Размещение техники</th>
+                 <th> Бизнес актив </th>
+                 <th> Дата выдачи </th>
+                 <th> Коментарий </th>
+             </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th>{{details.id}}</th>
+                <th>{{details.tech_name}}</th>
+                <th>{{details.tech_sn}}</th>
+                <th>{{details.tech_in}}</th>
+                <th>{{details.for_whom}}</th>
+                <th>{{details.tech_locate}}</th>
+                <th>{{details.tech_buisnes}}</th>
+                <th>{{details.input_date}}</th>
+                <th>{{details.input_coment}}</th>
+            </tr>
+            </tbody>
+        </table>
 
 {% endblock %}

@@ -33,7 +33,7 @@ About hardware
         {% for p in hardware %}
             <tbody>
             <tr>
-                <th>{{p.id}}</th>
+                <th><a href="{{ url_for('showhardware', id_hardware=p.id)}}">{{p.title}}{{p.id}}</a></th>
                 <th>{{p.tech_name}}</th>
                 <th>{{p.tech_sn}}</th>
                 <th>{{p.tech_in}}</th>
